@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Portfólio Profissional</title>
+   <style>/* Variables and Reset */
+    :root {
+        --primary: #3a56d4;
+        --primary-light: #5a76f4;
+        --secondary: #30c5ff;
+        --dark: #121212;
+        --darker: #0a0a0a;
+        --light: #f8f9fa;
+        --gray: #333333;
+        --text: #e0e0e0;
+        --text-muted: #aaaaaa;
+        --card-bg: #1e1e1e;
+        --border: #2a2a2a;
+    }
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+        background-color: var(--dark);
+        color: var(--text);
+        line-height: 1.5;
+    }
+    
+    /* Header */
+    header {
+        background: linear-gradient(135deg, var(--primary), #2d3a8a);
+        color: white;
+        padding: 2rem 0;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    
+    .profile-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    
+    .profile-pic {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 3px solid white;
+        margin-bottom: 1rem;
+        overflow: hidden;
+    }
+    
+    .profile-pic img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .profile-info h1 {
+        font-size: 2.2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .profile-info h2 {
+        font-weight: 400;
+        font-size: 1.1rem;
+        opacity: 0.9;
+    }
+    
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+    
+    .social-links a {
+        color: white;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        background-color: rgba(255,255,255,0.1);
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+    }
+    
+    .social-links a:hover {
+        background-color: rgba(255,255,255,0.2);
+        transform: translateY(-3px);
+    }
+    
+    /* Navigation */
+    nav {
+        background-color: var(--darker);
+        padding: 1rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    
+    .nav-container {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        padding: 0 1rem;
+    }
+    
+    .nav-list {
+        list-style: none;
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .nav-list a {
+        text-decoration: none;
+        color: var(--text);
+        font-weight: 500;
+        transition: color 0.3s;
+        padding: 0.5rem 0;
+        position: relative;
+    }
+    
+    .nav-list a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--primary-light);
+        transition: width 0.3s;
+    }
+    
+    .nav-list a:hover {
+        color: var(--primary-light);
+    }
+    
+    .nav-list a:hover::after {
+        width: 100%;
+    }
+    
+    /* Main Content */
+    main {
+        max-width: 1100px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+    
+    section {
+        margin-bottom: 3rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        color: var(--primary-light);
+        position: relative;
+        padding-bottom: 0.5rem;
+    }
+    
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(to right, var(--primary), var(--secondary));
+    }
+    
+    /* Cards and Containers */
+    .card {
+        background-color: var(--card-bg);
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        transition: transform 0.3s ease;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+    }
+    
+    /* About */
+    .about-content {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    /* Skills */
+    .skills-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .skill-category h3 {
+        color: var(--primary-light);
+        margin-bottom: 1rem;
+    }
+    
+    .skill-item {
+        margin-bottom: 1rem;
+    }
+    
+    .skill-name {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+    }
+    
+    .skill-bar {
+        height: 6px;
+        background-color: var(--gray);
+        border-radius: 3px;
+        overflow: hidden;
+    }
+    
+    .skill-level {
+        height: 100%;
+        background: linear-gradient(to right, var(--primary), var(--secondary));
+        border-radius: 3px;
+    }
+    
+    /* Projects */
+    .projects-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .project-image {
+        height: 180px;
+        overflow: hidden;
+        border-radius: 8px 8px 0 0;
+    }
+    
+    .project-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    
+    .project-card:hover .project-image img {
+        transform: scale(1.05);
+    }
+    
+    .project-info {
+        padding: 1.5rem;
+    }
+    
+    .project-info h3 {
+        color: var(--primary-light);
+        margin-bottom: 0.5rem;
+    }
+    
+    .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin: 1rem 0;
+    }
+    
+    .project-tag {
+        background-color: var(--gray);
+        color: var(--text);
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+    }
+    
+    .project-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+    
+    .project-links a {
+        text-decoration: none;
+        color: var(--secondary);
+        font-weight: 500;
+        transition: color 0.3s;
+    }
+    
+    .project-links a:hover {
+        color: var(--primary-light);
+    }
+    
+    /* Education */
+    .education-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .education-item {
+        margin-bottom: 1.5rem;
+    }
+    
+    .education-date {
+        color: var(--secondary);
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+    
+    .education-institution {
+        font-weight: 600;
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Contact */
+    .contact-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .contact-method {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        gap: 1rem;
+    }
+    
+    .contact-method i {
+        background-color: var(--primary);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: var(--gray);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        font-size: 1rem;
+        color: var(--text);
+    }
+    
+    .form-group textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+    
+    button {
+        background: linear-gradient(135deg, var(--primary), #2d3a8a);
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    
+    /* Footer */
+    footer {
+        background-color: var(--darker);
+        color: var(--text);
+        padding: 2rem 0;
+        text-align: center;
+        margin-top: 2rem;
+    }
+    
+    .footer-content {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    
+    .footer-links a {
+        color: var(--text);
+        text-decoration: none;
+        margin: 0 1rem;
+        transition: color 0.3s;
+    }
+    
+    .footer-links a:hover {
+        color: var(--secondary);
+    }
+    
+    /* Responsiveness */
+    @media (min-width: 768px) {
+        .about-content,
+        .contact-container {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+    
+    @media (max-width: 600px) {
+        .profile-info h1 {
+            font-size: 1.8rem;
+        }
+        
+        .profile-info h2 {
+            font-size: 1rem;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+        }
+    }</style>
+</head>
+<body>
+    <!-- Cabeçalho com foto e informações de perfil -->
+    <header>
+        <div class="profile-container">
+            <div class="profile-pic">
+                <img src="c:\Users\BRUNORODRIGUESZUGE\Downloads\bzz.jpg" alt="Minha foto de perfil">
+            </div>
+            <div class="profile-info">
+                <h1>Bruno Rodrigues Zuge</h1>
+                <h2>Desenvolvedor & Técnico em TI</h2>
+                <div class="social-links">
+                    <a href="#" target="_blank">LinkedIn</a>
+                    <a href="#" target="_blank">GitHub</a>
+                    <a href="#" target="_blank">Email</a>
+                    <a href="#" target="_blank">WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navegação -->
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-list">
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#habilidades">Habilidades</a></li>
+                <li><a href="#projetos">Projetos</a></li>
+                <li><a href="#formacao">Formação</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <!-- Seção Sobre Mim -->
+        <section id="sobre" class="scroll-reveal">
+            <h2 class="section-title">Sobre Mim</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Sou um profissional tecnológico em formação, atualmente cursando Técnico em TI no SENAC e concluindo o Ensino Médio na Escola Marista São Luís.</p>
+                    <p>Minha curiosidade por tecnologia começou desde cedo, sempre tive facilidade em entender como os computadores funcionam e como criar soluções através da programação.</p>
+                    <p>Busco constantemente expandir minhas habilidades técnicas e criar soluções inovadoras que resolvam problemas reais. Sou dedicado, comunicativo e trabalho bem em equipe.</p>
+                    <p>Estou em busca de oportunidades que me permitam aplicar meus conhecimentos em desenvolvimento web, programação e infraestrutura de TI, enquanto continuo aprendendo e crescendo profissionalmente.</p>
+                </div>
+                <div class="about-image">
+                    <img src="/api/placeholder/600/600" alt="Imagem trabalhando">
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Habilidades -->
+        <section id="habilidades" class="scroll-reveal">
+            <h2 class="section-title">Minhas Habilidades</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Desenvolvimento Web</h3>
+                    <ul class="skill-list">
+                        <li class="skill-item">
+                            <div class="skill-name">
+                                <span>HTML5</span>
+                                
+                            </div>
+                            
+                        </li>
+                        <li class="skill-item">
+                            <div class="skill-name">
+                                <span>CSS3</span>
+                               
+                            </div>
+                         
+                        </li>
+                        <li class="skill-item">
+                            <div class="skill-name">
+                                <span>JavaScript</span>
+                               
+                            </div>
+                            
+                        </li>
+                        <li class="skill-item">
+                            <div class="skill-name">
+                                <span>PHP</span>
+                               
+                            </div>
+                         
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Programação</h3>
+                    <ul class="skill-list">
+                        <li class="skill-item">
+                            <div class="skill-name">
+                                <span>Python</span>
+                              
+                            </div>
+                           
+                        </li>
+                        <li class="skill-item">
+                            <div class="skill-name">
+                                <span>C#</span>
+                               
+                            </div>
+                           
+                        </li>
+                        <li class="skill-item">
+                            <div class="skill-name">
+                                <span>Node.js</span>
+                              
+                            </div>
+                          
+                        </li>
+                        <li class="skill-item">
+                            <div class="skill-name">
+                                <span>MySQL</span>
+                              
+                            </div>
+                        
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Infraestrutura de TI</h3>
+                    <ul class="skill-list">
+                        <li class="skill-item">
+                            <div class="skill-name">
+                                <span>Redes</span>
+                                <span></span>
+                            </div>
+                           
+                        </li>
+                        <li class="skill-item">
+                            <div class="skill-name">
+                                <span>Cabeamento</span>
+                                <span></span>
+                            </div>
+                          
+                        </li>
+                        <li class="skill-item">
+                            <div class="skill-name">
+                                <span>Configuração de Equipamentos</span>
+                                <span></span>
+                            </div>
+                          
+                        </li>
+                        <li class="skill-item">
+                            <div class="skill-name">
+                                <span>Monitoramento</span>
+                                <span></span>
+                            </div>
+                            
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Ferramentas</h3>
+                    <ul class="skill-list">
+                        <li class="skill-item">
+                            <div class="skill-name">
+                                <span>Git & GitHub</span>
+                                <span></span>
+                            </div>
+                            
+                        </li>
+                        <li class="skill-item">
+                            <div class="skill-name">
+                                <span>VS Code</span>
+                                <span></span>
+                            </div>
+                          
+                        </li>
+                        <li class="skill-item">
+                            <div class="skill-name">
+                                <span>Postman</span>
+                                <span></span>
+                            </div>
+                          
+                        </li>
+                        <li class="skill-item">
+                            <div class="skill-name">
+                                <span>Insomnia</span>
+                                <span></span>
+                            </div>
+                         
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Projetos -->
+        <section id="projetos" class="scroll-reveal">
+            <h2 class="section-title">Meus Projetos</h2>
+            <div class="projects-container">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="/api/placeholder/600/400" alt="Sistema de Gerenciamento">
+                    </div>
+                    <div class="project-info">
+                        <h3>Sistema de Gerenciamento de Conteúdo</h3>
+                        <p>Desenvolvimento de um CMS personalizado utilizando PHP e MySQL, com interface responsiva em HTML/CSS/JS.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">PHP</span>
+                            <span class="project-tag">MySQL</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">Responsivo</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" target="_blank">Ver Demo</a>
+                            <a href="#" target="_blank">Código Fonte</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="/api/placeholder/600/400" alt="API REST">
+                    </div>
+                    <div class="project-info">
+                        <h3>API REST para Gerenciamento de Tarefas</h3>
+                        <p>API desenvolvida com Node.js que permite criar, listar, atualizar e excluir tarefas, com autenticação JWT.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Node.js</span>
+                            <span class="project-tag">Express</span>
+                            <span class="project-tag">JWT</span>
+                            <span class="project-tag">MongoDB</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" target="_blank">Documentação</a>
+                            <a href="#" target="_blank">Código Fonte</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="/api/placeholder/600/400" alt="Aplicação Desktop">
+                    </div>
+                    <div class="project-info">
+                        <h3>Aplicação Desktop de Controle de Estoque</h3>
+                        <p>Software desenvolvido em C# para gerenciamento de estoque com interface intuitiva e relatórios em PDF.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">C#</span>
+                            <span class="project-tag">.NET</span>
+                            <span class="project-tag">SQL Server</span>
+                            <span class="project-tag">Windows Forms</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" target="_blank">Download</a>
+                            <a href="#" target="_blank">Código Fonte</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="/api/placeholder/600/400" alt="Projeto Infraestrutura">
+                    </div>
+                    <div class="project-info">
+                        <h3>Projeto de Infraestrutura de Rede</h3>
+                        <p>Planejamento e implementação de uma infraestrutura de rede para pequenas empresas, com documentação completa.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Redes</span>
+                            <span class="project-tag">Cabeamento</span>
+                            <span class="project-tag">Segurança</span>
+                            <span class="project-tag">Documentação</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" target="_blank">Visualizar Projeto</a>
+                            <a href="#" target="_blank">Documentação</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="education-date">2023 - Presente</div>
+        <div class="education-institution">SENAC</div>
+        <div class="education-degree">Técnico em Tecnologia da Informação</div>
+        <p>Cursando formação técnica com foco em desenvolvimento de software, redes e infraestrutura de TI. O curso oferece uma base sólida em programação, banco de dados, configuração de servidores e manutenção de equipamentos.</p>
+    </div>
+    
+    <div class="education-item">
+        <div class="education-date">2021 - Presente</div>
+        <div class="education-institution">Escola Marista São Luís</div>
+        <div class="education-degree">Ensino Médio</div>
+        <p>Conclusão prevista para dezembro de 2023. Participação em projetos extracurriculares na área de tecnologia e informática.</p>
+    </div>
+    
+    <div class="education-item">
+        <div class="education-date">2022</div>
+        <div class="education-institution">Alura</div>
+        <div class="education-degree">Certificação em Desenvolvimento Web</div>
+        <p>Curso completo de desenvolvimento web, abrangendo HTML5, CSS3, JavaScript, PHP e MySQL. Desenvolvimento de projetos práticos e aplicação de padrões de design responsivo.</p>
+    </div>
+    
+    <div class="education-item">
+        <div class="education-date">2022</div>
+        <div class="education-institution">Cisco Networking Academy</div>
+        <div class="education-degree">Introdução a Internet das Coisas (IoT)</div>
+        <p>Curso introdutório sobre conceitos e aplicações de Internet das Coisas, incluindo configuração de dispositivos, protocolos de comunicação e segurança.</p>
+    </div>
+</div>
+</section>
+
+<!-- Seção Contato -->
+<section id="contato" class="scroll-reveal">
+<h2 class="section-title">Entre em Contato</h2>
+<div class="contact-container">
+    <div class="contact-info">
+        <h3>Informações de Contato</h3>
+        <div class="contact-method">
+            <i class="fa fa-envelope"></i>
+            <div>
+                <h4>Email</h4>
+                <p>seuemail@exemplo.com</p>
+            </div>
+        </div>
+        <div class="contact-method">
+            <i class="fa fa-phone"></i>
+            <div>
+                <h4>Telefone</h4>
+                <p>(XX) XXXXX-XXXX</p>
+            </div>
+        </div>
+        <div class="contact-method">
+            <i class="fa fa-map-marker"></i>
+            <div>
+                <h4>Localização</h4>
+                <p>Sua Cidade, Estado - Brasil</p>
+            </div>
+        </div>
+        <div class="contact-method">
+            <i class="fa fa-linkedin"></i>
+            <div>
+                <h4>LinkedIn</h4>
+                <p>linkedin.com/in/seuperfil</p>
+            </div>
+        </div>
+    </div>
+    <div class="contact-form">
+        <h3>Envie uma Mensagem</h3>
+        <form action="#" method="POST">
+            <div class="form-group">
+                <label for="name">Nome</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="subject">Assunto</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Mensagem</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit">Enviar Mensagem</button>
+        </form>
+    </div>
+</div>
+</section>
+</main>
+
+<!-- Rodapé -->
+
+
+<!-- Botão Toggle para Modo Escuro -->
+<div class="theme-toggle">
+<i class="fa fa-moon-o"></i>
+</div>
+
+<!-- Font Awesome para ícones -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- Script para as animações e interatividade -->
+<script>
+// Revelar elementos na rolagem
+function revealOnScroll() {
+const elements = document.querySelectorAll('.scroll-reveal');
+
+elements.forEach(element => {
+    const elementTop = element.getBoundingClientRect().top;
+    const windowHeight = window.innerHeight;
+    
+    if (elementTop < windowHeight - 100) {
+        element.classList.add('active');
+    }
+});
+}
+
+// Animar as barras de progresso das habilidades
+function animateSkillBars() {
+
+
+skillElements.forEach(element => {
+    const width = element.getAttribute('data-width');
+    element.style.width = `${width}%`;
+});
+}
+
+// Toggle de modo escuro
+function setupDarkModeToggle() {
+const toggle = document.querySelector('.theme-toggle');
+const icon = toggle.querySelector('i');
+
+toggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    
+    if (document.body.classList.contains('dark-mode')) {
+        icon.classList.remove('fa-moon-o');
+        icon.classList.add('fa-sun-o');
+    } else {
+        icon.classList.remove('fa-sun-o');
+        icon.classList.add('fa-moon-o');
+    }
+});
+}
+
+// Rolagem suave para os links de navegação
+function setupSmoothScroll() {
+const links = document.querySelectorAll('nav a, .footer-links a');
+
+links.forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        
+        window.scrollTo({
+            top: targetSection.offsetTop - 80,
+            behavior: 'smooth'
+        });
+    });
+});
+}
+
+// Iniciar todas as funções quando o documento estiver pronto
+document.addEventListener('DOMContentLoaded', function() {
+revealOnScroll();
+animateSkillBars();
+setupDarkModeToggle();
+setupSmoothScroll();
+
+// Continuar a revelar elementos durante a rolagem
+window.addEventListener('scroll', revealOnScroll);
+});
+</script>
+</body>
+</html>
